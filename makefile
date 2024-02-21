@@ -52,3 +52,5 @@ files: eslint_config
 	@echo "NODE_ENV=dev\nPORT=3333" > .env.example
 
 	@echo "# PROJECT" > README.md
+
+	npx tsc --init
