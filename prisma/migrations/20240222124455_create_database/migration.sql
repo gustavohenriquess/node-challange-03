@@ -8,9 +8,6 @@ CREATE TYPE "Sex" AS ENUM ('MALE', 'FEMELE');
 CREATE TYPE "Type" AS ENUM ('DOG', 'CAT', 'BIRD', 'FISH', 'REPTILE', 'RODENT', 'OTHER');
 
 -- CreateEnum
-CREATE TYPE "Role" AS ENUM ('USER', 'ADMIN');
-
--- CreateEnum
 CREATE TYPE "Energy" AS ENUM ('ONE', 'TWO', 'THREE', 'FOUR', 'FIVE');
 
 -- CreateTable
@@ -47,6 +44,7 @@ CREATE TABLE "pets_complements" (
 CREATE TABLE "orgs" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
     "person_responsible" TEXT,
     "postal_code" TEXT NOT NULL,
     "cell_phone" TEXT NOT NULL,

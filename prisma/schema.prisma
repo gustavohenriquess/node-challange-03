@@ -28,11 +28,6 @@ enum Type {
   OTHER
 }
 
-enum Role {
-  USER
-  ADMIN
-}
-
 enum Energy {
   ONE
   TWO
@@ -77,6 +72,7 @@ model PetComplement {
 model Org {
   id                 String   @id @default(uuid())
   name               String
+  email              String
   person_responsible String?
   postal_code        String
   cell_phone         String
