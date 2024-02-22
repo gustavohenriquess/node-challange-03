@@ -1,4 +1,5 @@
 import { OrgsRepository } from '@/repositories/orgs-repository'
+import { Org } from '@prisma/client'
 
 interface CreateOrgRequest {
   name: string
@@ -8,10 +9,11 @@ interface CreateOrgRequest {
   password: string
 }
 
+interface CreateOrgResponse {
+  org: Org
+}
 export class CreateOrgUseCase {
   constructor(private orgRepo: OrgsRepository) {}
 
-  async execute(org: CreateOrgRequest) {
-    return org
-  }
+  async execute(org: CreateOrgRequest): CreateOrgResponse {}
 }
