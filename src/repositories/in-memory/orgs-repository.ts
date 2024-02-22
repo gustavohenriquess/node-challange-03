@@ -9,6 +9,7 @@ export class InMemoryOrgsRepository implements OrgsRepository {
     const org = {
       id: data.id ?? randomUUID(),
       name: data.name,
+      email: data.email,
       person_responsible: data.person_responsible ?? null,
       postal_code: data.postal_code,
       cell_phone: data.cell_phone,
