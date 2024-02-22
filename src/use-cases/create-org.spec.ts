@@ -1,5 +1,5 @@
-import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
 import { describe, it, beforeEach, expect } from 'vitest'
+import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
 import { CreateOrgUseCase } from './create-org'
 
 let repository: InMemoryOrgsRepository
