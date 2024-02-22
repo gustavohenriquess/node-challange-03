@@ -1,5 +1,3 @@
-import { OrgsRepository } from '@/repositories/orgs-repository'
-import { PetsComplementsRepository } from '@/repositories/pets-complements-repository'
 import { PetsRepository } from '@/repositories/pets-repository'
 import { Pet } from '@prisma/client'
 
@@ -12,11 +10,7 @@ interface FetchCityPetResponse {
 }
 
 export class FetchCityPetUseCase {
-  constructor(
-    private petRepo: PetsRepository,
-    private petComplementRepo: PetsComplementsRepository,
-    private orgRepo: OrgsRepository,
-  ) {}
+  constructor(private petRepo: PetsRepository) {}
 
   async execute(data: FetchCityPetRequest): FetchCityPetResponse {}
 }

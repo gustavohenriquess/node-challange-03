@@ -15,7 +15,7 @@ describe('Fetch Pet by City', () => {
     petRepo = new InMemoryPetsRepository()
     petComplementRepo = new InMemoryPetsComplementsRepository()
     orgRepo = new InMemoryOrgsRepository()
-    sut = new FetchCityPetUseCase(petRepo, petComplementRepo, orgRepo)
+    sut = new FetchCityPetUseCase(petRepo)
 
     await orgRepo.create({
       id: 'orgId',
