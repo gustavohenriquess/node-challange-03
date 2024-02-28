@@ -15,5 +15,5 @@ interface CreateOrgResponse {
 export class CreateOrgUseCase {
   constructor(private orgRepo: OrgsRepository) {}
 
-  async execute(org: CreateOrgRequest): CreateOrgResponse {}
+  async execute(org: CreateOrgRequest): Promise<CreateOrgResponse> {}
 }

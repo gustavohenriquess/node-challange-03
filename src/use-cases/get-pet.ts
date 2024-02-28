@@ -18,5 +18,5 @@ export class GetPetUseCase {
     private petComplementRepo: PetsComplementsRepository,
   ) {}
 
-  async execute(data: GetPetRequest): GetPetResponse {}
+  async execute(data: GetPetRequest): Promise<GetPetResponse> {}
 }

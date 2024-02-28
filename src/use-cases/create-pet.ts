@@ -34,5 +34,5 @@ export class CreatePetUseCase {
     private orgRepo: OrgsRepository,
   ) {}
 
-  async execute(data: CreatePetRequest): CreatePetResponse {}
+  async execute(data: CreatePetRequest): Promise<CreatePetResponse> {}
 }
