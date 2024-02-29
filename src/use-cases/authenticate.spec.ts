@@ -2,10 +2,12 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { hash } from 'bcryptjs'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
 import { AuthenticateUseCase } from './authenticate'
+import { InvalidCredentialsError } from './errors/invalid-credentials-error'
+import { ResourceNotFoundError } from './errors/resource-not-found'
 
 let orgsRepo: InMemoryOrgsRepository
 let sut: AuthenticateUseCase
-describe('Authenticate UseCase', () => {
+describe.only('Authenticate UseCase', () => {
   beforeEach(() => {
     orgsRepo = new InMemoryOrgsRepository()
     sut = new AuthenticateUseCase(orgsRepo)
@@ -36,7 +38,7 @@ describe('Authenticate UseCase', () => {
         email: 'find.friend@gmail.com',
         password: 'f1nd@fr13nd',
       })
-    }).rejects.toBeInstanceOf(Error)
+    }).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 
   it('should not be able to authenticate with wrong password', async () => {
@@ -55,6 +57,6 @@ describe('Authenticate UseCase', () => {
         email: 'find.friend@gmail.com',
         password: 'find@friend',
       })
-    }).rejects.toBeInstanceOf(Error)
+    }).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 })
