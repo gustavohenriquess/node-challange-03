@@ -2,6 +2,7 @@ import { OrgsRepository } from '@/repositories/orgs-repository'
 import { Org } from '@prisma/client'
 import { hash } from 'bcryptjs'
 import axios from 'axios'
+import { OrgAlreadyExistsError } from './errors/org-already-exists-error'
 
 interface CreateOrgRequest {
   name: string
@@ -26,7 +27,11 @@ export class CreateOrgUseCase {
     postal_code,
     cell_phone,
   }: CreateOrgRequest): Promise<CreateOrgResponse> {
-    console.log('Creating org...')
+    const orgAlreadyExists = await this.orgsRepo.findByEmail(email)
+
+    if (orgAlreadyExists) {
+      throw new OrgAlreadyExistsError()
+    }
 
     const password_hash = await hash(password, 6)
 
