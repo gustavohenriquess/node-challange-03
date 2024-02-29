@@ -7,7 +7,7 @@ import { ResourceNotFoundError } from './errors/resource-not-found'
 
 let orgsRepo: InMemoryOrgsRepository
 let sut: AuthenticateUseCase
-describe.only('Authenticate UseCase', () => {
+describe('Authenticate UseCase', () => {
   beforeEach(() => {
     orgsRepo = new InMemoryOrgsRepository()
     sut = new AuthenticateUseCase(orgsRepo)
