@@ -3,6 +3,7 @@ import { InMemoryPetsRepository } from '@/repositories/in-memory/pets-repository
 import { CreatePetUseCase } from './create-pet'
 import { InMemoryPetsComplementsRepository } from '@/repositories/in-memory/pets-complements-repository'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
+import { ResourceNotFoundError } from './errors/resource-not-found'
 
 let petRepo: InMemoryPetsRepository
 let petComplementRepo: InMemoryPetsComplementsRepository
@@ -74,5 +75,26 @@ describe('Create Pet', () => {
         }),
       ]),
     )
+  })
+
+  it('should not be able to create a new pet with invalid org', async () => {
+    await expect(async () => {
+      await sut.execute({
+        name: 'Pet',
+        about: 'About',
+        age: 1,
+        energy: 'FOUR',
+        size: 'SMALL',
+        independence: 'MEDIUM',
+        sex: 'MALE',
+        type: 'DOG',
+        environment: 'MEDIUM',
+        orgId: 'INVALID_ORG_ID',
+        complements: [
+          { requirement: 'requirement' },
+          { photo_url: 'photo_url' },
+        ],
+      })
+    }).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })
