@@ -4,13 +4,14 @@ import { InMemoryPetsComplementsRepository } from '@/repositories/in-memory/pets
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
 import { GetPetUseCase } from './get-pet'
 import { randomUUID } from 'node:crypto'
+import { ResourceNotFoundError } from './errors/resource-not-found'
 
 let petRepo: InMemoryPetsRepository
 let petComplementRepo: InMemoryPetsComplementsRepository
 let orgRepo: InMemoryOrgsRepository
 let sut: GetPetUseCase
 
-describe('Get Pet UseCase', async () => {
+describe.only('Get Pet UseCase', async () => {
   beforeEach(async () => {
     petRepo = new InMemoryPetsRepository()
     petComplementRepo = new InMemoryPetsComplementsRepository()
@@ -30,7 +31,7 @@ describe('Get Pet UseCase', async () => {
     })
   })
 
-  it('should return a pet', async () => {
+  it('should be able to return a pet', async () => {
     const petId = randomUUID()
     await petRepo.create({
       id: petId,
@@ -51,5 +52,11 @@ describe('Get Pet UseCase', async () => {
 
     expect(pet.id).toEqual(petId)
     expect(complements).toEqual([])
+  })
+
+  it('should not be able to return a uncreated petn', async () => {
+    await expect(async () => {
+      await sut.execute({ id: randomUUID() })
+    }).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })
