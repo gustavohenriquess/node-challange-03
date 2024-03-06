@@ -2,7 +2,7 @@
 CREATE TYPE "Size" AS ENUM ('SMALL', 'MEDIUM', 'LARGE');
 
 -- CreateEnum
-CREATE TYPE "Sex" AS ENUM ('MALE', 'FEMELE');
+CREATE TYPE "Sex" AS ENUM ('MALE', 'FEMALE');
 
 -- CreateEnum
 CREATE TYPE "Type" AS ENUM ('DOG', 'CAT', 'BIRD', 'FISH', 'REPTILE', 'RODENT', 'OTHER');

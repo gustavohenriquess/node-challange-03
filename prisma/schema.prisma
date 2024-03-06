@@ -15,7 +15,7 @@ enum Size {
 
 enum Sex {
   MALE
-  FEMELE
+  FEMALE
 }
 
 enum Type {
