@@ -20,7 +20,7 @@ export class InMemoryPetsComplementsRepository
     return petComplement
   }
 
-  async findById(id: string) {
-    return this.petsComplements.find((pet) => pet.id === id) ?? null
+  async findByPetId(id: string) {
+    return this.petsComplements.filter((complement) => complement.pet_id === id)
   }
 }
