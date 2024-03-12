@@ -13,6 +13,6 @@ export interface FindPetsArgs {
 
 export interface PetsRepository {
   create: (data: Prisma.PetUncheckedCreateInput) => Promise<Pet>
-  find: (params: FindPetsArgs) => Promise<Pet[] | null>
+  find: (params: FindPetsArgs, page: number) => Promise<Pet[] | null>
   findById: (id: string) => Promise<Pet | null>
 }

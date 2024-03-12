@@ -25,19 +25,33 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pet
   }
 
-  async find(params: FindPetsArgs) {
-    return this.pets.filter((pet) => {
-      return (
-        pet.city === params.city &&
-        pet.age === params.age &&
-        pet.energy === params.energy &&
-        pet.size === params.size &&
-        pet.independence === params.independence &&
-        pet.sex === params.sex &&
-        pet.type === params.type &&
-        pet.environment === params.environment
-      )
-    })
+  async find(
+    {
+      city,
+      age,
+      energy,
+      size,
+      independence,
+      sex,
+      type,
+      environment,
+    }: FindPetsArgs,
+    page: number,
+  ) {
+    return this.pets
+      .filter((pet) => {
+        return (
+          pet.city === city ||
+          pet.age === age ||
+          pet.energy === energy ||
+          pet.size === size ||
+          pet.independence === independence ||
+          pet.sex === sex ||
+          pet.type === type ||
+          pet.environment === environment
+        )
+      })
+      .slice((page - 1) * 20, page * 20)
   }
 
   async findById(id: string) {

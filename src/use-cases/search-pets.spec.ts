@@ -7,16 +7,17 @@ import { randomUUID } from 'node:crypto'
 
 let petsRepo: InMemoryPetsRepository
 let petsComplementRepo: InMemoryPetsComplementsRepository
-let orgRepo: InMemoryOrgsRepository
+let orgsRepo: InMemoryOrgsRepository
 let sut: SearchPetsUseCase
 
 describe('Search Pets UseCase', () => {
   beforeEach(async () => {
     petsRepo = new InMemoryPetsRepository()
     petsComplementRepo = new InMemoryPetsComplementsRepository()
+    orgsRepo = new InMemoryOrgsRepository()
     sut = new SearchPetsUseCase(petsRepo, petsComplementRepo)
 
-    await orgRepo.create({
+    await orgsRepo.create({
       id: 'orgId',
       name: 'Org',
       email: 'email@email.com',
@@ -77,8 +78,10 @@ describe('Search Pets UseCase', () => {
     expect(pets).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          id: expect.any(String),
-          city: 'São Bernardo',
+          pet: expect.objectContaining({
+            id: expect.any(String),
+            city: 'São Bernardo',
+          }),
         }),
       ]),
     )
