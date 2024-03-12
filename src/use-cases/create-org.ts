@@ -35,11 +35,9 @@ export class CreateOrgUseCase {
 
     const password_hash = await hash(password, 6)
 
-    const resp = await axios.get(
-      `https://api.brasilaberto.com/v1/zipcode/${postal_code}`,
-    )
+    const resp = await axios.get(`https://viacep.com.br/ws/${postal_code}/json`)
 
-    const { city, state } = resp.data.result
+    const { localidade, uf } = resp.data
     const org = await this.orgsRepo.create({
       name,
       email,
@@ -47,8 +45,8 @@ export class CreateOrgUseCase {
       postal_code,
       cell_phone,
       password_hash,
-      state,
-      city,
+      state: uf,
+      city: localidade,
     })
 
     return { org }

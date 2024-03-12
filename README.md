@@ -52,4 +52,5 @@
 
 
 ## Services
-[CEP](https://brasilaberto.com/docs/v2/zipcode)
+[CEP_1](https://brasilaberto.com/docs/v1/zipcode)
+[CEP_2](https://viacep.com.br/ws/09070000/json)
