@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { InMemoryPetsRepository } from '@/repositories/in-memory/pets-repository'
-import { CreatePetUseCase } from './create-pet'
+import { CreatePetUseCase } from '../create-pet'
 import { InMemoryPetsComplementsRepository } from '@/repositories/in-memory/pets-complements-repository'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found'
+import { ResourceNotFoundError } from '../errors/resource-not-found'
 
 let petRepo: InMemoryPetsRepository
 let petComplementRepo: InMemoryPetsComplementsRepository

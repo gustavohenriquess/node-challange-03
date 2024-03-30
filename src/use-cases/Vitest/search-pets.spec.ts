@@ -1,7 +1,7 @@
 import { describe, expect, it, beforeEach } from 'vitest'
 import { InMemoryPetsComplementsRepository } from '@/repositories/in-memory/pets-complements-repository'
 import { InMemoryPetsRepository } from '@/repositories/in-memory/pets-repository'
-import { SearchPetsUseCase } from './search-pets'
+import { SearchPetsUseCase } from '../search-pets'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
 import { randomUUID } from 'node:crypto'
 

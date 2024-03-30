@@ -2,9 +2,9 @@ import { expect, describe, it, beforeEach } from 'vitest'
 import { InMemoryPetsRepository } from '@/repositories/in-memory/pets-repository'
 import { InMemoryPetsComplementsRepository } from '@/repositories/in-memory/pets-complements-repository'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
-import { GetPetUseCase } from './get-pet'
+import { GetPetUseCase } from '../get-pet'
 import { randomUUID } from 'node:crypto'
-import { ResourceNotFoundError } from './errors/resource-not-found'
+import { ResourceNotFoundError } from '../errors/resource-not-found'
 
 let petRepo: InMemoryPetsRepository
 let petComplementRepo: InMemoryPetsComplementsRepository
