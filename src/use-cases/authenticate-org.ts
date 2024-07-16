@@ -4,22 +4,22 @@ import { compare } from 'bcryptjs'
 import { InvalidCredentialsError } from './errors/invalid-credentials-error'
 import { ResourceNotFoundError } from './errors/resource-not-found'
 
-interface AuthenticateUseCaseRequest {
+interface AuthenticateOrgUseCaseRequest {
   email: string
   password: string
 }
 
-interface AuthenticateUseCaseResponse {
+interface AuthenticateOrgUseCaseResponse {
   org: Org
 }
 
-export class AuthenticateUseCase {
+export class AuthenticateOrgUseCase {
   constructor(private orgsRepository: OrgsRepository) {}
 
   async execute({
     email,
     password,
-  }: AuthenticateUseCaseRequest): Promise<AuthenticateUseCaseResponse> {
+  }: AuthenticateOrgUseCaseRequest): Promise<AuthenticateOrgUseCaseResponse> {
     const org = await this.orgsRepository.findByEmail(email)
 
     if (!org) {

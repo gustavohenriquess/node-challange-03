@@ -1,16 +1,16 @@
 import { describe, it, expect, beforeEach } from 'vitest'
 import { hash } from 'bcryptjs'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
-import { AuthenticateUseCase } from './authenticate'
+import { AuthenticateOrgUseCase } from './authenticate-org'
 import { InvalidCredentialsError } from './errors/invalid-credentials-error'
 import { ResourceNotFoundError } from './errors/resource-not-found'
 
 let orgsRepo: InMemoryOrgsRepository
-let sut: AuthenticateUseCase
+let sut: AuthenticateOrgUseCase
 describe('Authenticate UseCase', () => {
   beforeEach(() => {
     orgsRepo = new InMemoryOrgsRepository()
-    sut = new AuthenticateUseCase(orgsRepo)
+    sut = new AuthenticateOrgUseCase(orgsRepo)
   })
 
   it('should be able to authenticate', async () => {
