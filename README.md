@@ -16,6 +16,13 @@
 - [x] Todos os filtros, além da cidade, são opcionais
 - [x] Para uma ORG acessar a aplicação como admin, ela precisa estar logada
 
+## ToDO
+- [x] Melhorar Filter pets inMemory
+- [x] Criar Prisma Repositories
+- [x] Criar Factories
+- [ ] Criar Rotas HTTP
+- [ ] Criar Testes 2e2
+- [ ]
 
 ## Pets
 - id
