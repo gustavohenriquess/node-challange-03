@@ -71,8 +71,8 @@ model PetComplement {
 
 model Org {
   id                 String   @id @default(uuid())
-  name               String
-  email              String
+  name               String   @unique
+  email              String   @unique
   person_responsible String?
   postal_code        String
   cell_phone         String
