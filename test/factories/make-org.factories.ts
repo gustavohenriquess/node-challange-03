@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker'
+import { Faker, pt_BR } from '@faker-js/faker'
 import crypto from 'node:crypto'
 
 type Overwrite = {
@@ -14,6 +14,10 @@ type Overwrite = {
 }
 
 export function makeOrg(overwrite?: Overwrite) {
+  const faker = new Faker({
+    locale: [pt_BR],
+  })
+
   return {
     id: overwrite?.id ?? crypto.randomUUID(),
     name: overwrite?.name ?? faker.company.name(),

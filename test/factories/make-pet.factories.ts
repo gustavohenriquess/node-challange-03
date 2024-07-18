@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker'
+import { Faker, pt_BR } from '@faker-js/faker'
 import crypto from 'node:crypto'
 
 type Complements = {
@@ -21,6 +21,10 @@ type Overwrite = {
 }
 
 export function makePet(overwrite?: Overwrite) {
+  const faker = new Faker({
+    locale: [pt_BR],
+  })
+
   const id = crypto.randomUUID()
   return {
     pet: {
