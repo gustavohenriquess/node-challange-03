@@ -7,7 +7,7 @@ import { OrgAlreadyExistsError } from './errors/org-already-exists-error'
 interface CreateOrgRequest {
   name: string
   email: string
-  person_responsible: string
+  person_responsible: string | undefined
   postal_code: string
   cell_phone: string
   password: string
