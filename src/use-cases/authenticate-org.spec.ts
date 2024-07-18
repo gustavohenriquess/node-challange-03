@@ -3,7 +3,6 @@ import { hash } from 'bcryptjs'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
 import { AuthenticateOrgUseCase } from './authenticate-org'
 import { InvalidCredentialsError } from './errors/invalid-credentials-error'
-import { ResourceNotFoundError } from './errors/resource-not-found'
 
 let orgsRepo: InMemoryOrgsRepository
 let sut: AuthenticateOrgUseCase
@@ -38,7 +37,7 @@ describe('Authenticate UseCase', () => {
         email: 'find.friend@gmail.com',
         password: 'f1nd@fr13nd',
       })
-    }).rejects.toBeInstanceOf(ResourceNotFoundError)
+    }).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 
   it('should not be able to authenticate with wrong password', async () => {
