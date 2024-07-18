@@ -11,8 +11,8 @@ export class PrismaOrgsRepository implements OrgsRepository {
     return await prisma.org.findUnique({ where: { name } })
   }
 
-  async findByEmail(name: string): Promise<Org | null> {
-    return await prisma.org.findUnique({ where: { name } })
+  async findByEmail(email: string): Promise<Org | null> {
+    return await prisma.org.findUnique({ where: { email } })
   }
 
   async findById(id: string): Promise<Org | null> {
