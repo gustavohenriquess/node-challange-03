@@ -35,7 +35,7 @@ describe('Register Pet- e2e', () => {
     })
 
     const { token } = authResponse.body
-    console.log('token', token)
+
     const response = await request(app.server)
       .post('/pets')
       .set('Authorization', `Bearer ${token}`)
@@ -64,7 +64,6 @@ describe('Register Pet- e2e', () => {
           'OTHER',
         ]),
       })
-    console.log(response.body)
     expect(response.statusCode).toBe(201)
   })
 })
