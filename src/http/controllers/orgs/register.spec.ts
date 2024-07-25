@@ -3,7 +3,7 @@ import { Faker, pt_BR } from '@faker-js/faker'
 import request from 'supertest'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-describe('Register - e2e', () => {
+describe('Register Org - e2e', () => {
   beforeAll(async () => {
     app.ready()
   })
