@@ -1,13 +1,12 @@
 import { PetsComplementsRepository } from '@/repositories/pets-complements-repository'
 import { PetsRepository } from '@/repositories/pets-repository'
-import { $Enums, Pet, PetComplement } from '@prisma/client'
+import { Pet, PetComplement } from '@prisma/client'
 
 interface SearchPetsRequest {
   city: string
   page: number
   age?: number
   energy?: 'ONE' | 'TWO' | 'THREE' | 'FOUR' | 'FIVE'
-  energys?: $Enums.Energy
   size?: 'SMALL' | 'MEDIUM' | 'LARGE'
   independence?: 'SMALL' | 'MEDIUM' | 'LARGE'
   type?: 'DOG' | 'CAT' | 'BIRD' | 'FISH' | 'REPTILE' | 'RODENT' | 'OTHER'
