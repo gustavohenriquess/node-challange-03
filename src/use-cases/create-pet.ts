@@ -5,8 +5,8 @@ import { Pet, PetComplement } from '@prisma/client'
 import { ResourceNotFoundError } from './errors/resource-not-found'
 
 interface Complements {
-  photo_url?: string
-  requirement?: string
+  photo_url?: string | undefined
+  requirement?: string | undefined
 }
 
 interface CreatePetRequest {
@@ -20,7 +20,7 @@ interface CreatePetRequest {
   type: 'DOG' | 'CAT' | 'BIRD' | 'FISH' | 'REPTILE' | 'RODENT' | 'OTHER'
   environment: 'SMALL' | 'MEDIUM' | 'LARGE'
   orgId: string
-  complements?: Complements[]
+  complements?: Complements[] | undefined
 }
 
 interface CreatePetResponse {
