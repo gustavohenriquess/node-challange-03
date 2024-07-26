@@ -12,7 +12,7 @@ describe('Search Pet- e2e', () => {
     await app.close()
   })
 
-  it('Should be able to register', async () => {
+  it('Should be able to search', async () => {
     const faker = new Faker({
       locale: [pt_BR],
     })
