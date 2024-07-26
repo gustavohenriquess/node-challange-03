@@ -12,10 +12,10 @@ interface SearchPetsRequest {
   type?: 'DOG' | 'CAT' | 'BIRD' | 'FISH' | 'REPTILE' | 'RODENT' | 'OTHER'
 }
 
-interface petFind {
-  pet: Pet
+interface petFind extends Pet {
   complements: PetComplement[] | null
 }
+
 interface SearchPetsResponse {
   pets: petFind[]
 }
@@ -54,7 +54,7 @@ export class SearchPetsUseCase {
       pets: await Promise.all(
         pets.map(async (pet) => {
           const complements = await this.petsComplementRepo.findByPetId(pet.id)
-          return { pet, complements }
+          return { ...pet, complements }
         }),
       ),
     }

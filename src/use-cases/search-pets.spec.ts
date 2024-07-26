@@ -78,10 +78,8 @@ describe('Search Pets UseCase', () => {
     expect(pets).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          pet: expect.objectContaining({
-            id: expect.any(String),
-            city: 'São Bernardo',
-          }),
+          id: expect.any(String),
+          city: 'São Bernardo',
         }),
       ]),
     )
