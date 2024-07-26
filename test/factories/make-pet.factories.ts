@@ -32,7 +32,7 @@ export function makePet(overwrite?: Overwrite) {
       org_id: overwrite?.orgId ?? crypto.randomUUID(),
       name: faker.animal.dog(),
       about: faker.lorem.paragraph(),
-      age: overwrite?.age ?? faker.number.int().toString(),
+      age: overwrite?.age ?? faker.number.int(),
       city: faker.location.city(),
       size:
         overwrite?.size ??
