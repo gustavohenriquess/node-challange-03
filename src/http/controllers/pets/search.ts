@@ -3,8 +3,6 @@ import { z } from 'zod'
 import { makeSearchPetUseCase } from '@/use-cases/factories/make-search-pet-use-case'
 
 export async function search(request: FastifyRequest, reply: FastifyReply) {
-  console.log(request.query)
-
   const searchBodySchema = z.object({
     city: z.string(),
     page: z.coerce.number().min(1).default(1),
