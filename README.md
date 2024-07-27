@@ -21,9 +21,8 @@
 - [x] Criar Prisma Repositories
 - [x] Criar Factories
 - [x] Criar Rotas HTTP
-- [ ] Criar Testes 2e2
-- [ ] Criar Services para implantar dependencia no busca de CEP
-- [ ]
+- [x] Criar Testes 2e2
+- [x] Criar Services para implantar dependencia no busca de CEP
 
 ## Pets
 - id
