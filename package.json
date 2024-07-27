@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test": "vitest run --dir src/use-cases",
+    "test:watch": "vitest --dir src/use-cases",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
+    "test:e2e": "vitest --dir src/http",
+    "test:e2e:watch": "vitest --dir src/http"
   },
   "keywords": [],
   "author": "",
