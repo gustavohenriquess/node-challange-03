@@ -1,4 +1,5 @@
 import { Faker, pt_BR } from '@faker-js/faker'
+import crypto from 'node:crypto'
 
 type Complements = {
   photo_url?: string
