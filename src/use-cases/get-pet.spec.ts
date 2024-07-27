@@ -29,7 +29,6 @@ describe.only('Get Pet UseCase', async () => {
     await petRepo.create(pet)
 
     const response = await sut.execute({ id: pet.id })
-    console.log(response)
     expect(response.id).toEqual(pet.id)
     expect(response.complements).toEqual([])
   })

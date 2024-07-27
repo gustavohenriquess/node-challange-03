@@ -14,7 +14,7 @@ describe('Search Pet- e2e', () => {
   })
 
   it('Should be able to search', async () => {
-    const org = makeOrg({ city: 'SÃO PAULO' })
+    const org = makeOrg({ city: 'São Paulo' })
     const pet = makePet({ city: org.city })
 
     await request(app.server).post('/orgs').send(org)

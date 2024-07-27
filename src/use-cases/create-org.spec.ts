@@ -4,14 +4,17 @@ import { CreateOrgUseCase } from './create-org'
 import { OrgAlreadyExistsError } from './errors/org-already-exists-error'
 import { compare } from 'bcryptjs'
 import { makeOrg } from 'test/factories/make-org.factories'
+import { InMemoryLocationService } from '@/services/in-memory/location'
 
 let repository: InMemoryOrgsRepository
 let sut: CreateOrgUseCase
+let service: InMemoryLocationService
 
 describe('Create Org', () => {
   beforeEach(() => {
     repository = new InMemoryOrgsRepository()
-    sut = new CreateOrgUseCase(repository)
+    service = new InMemoryLocationService()
+    sut = new CreateOrgUseCase(repository, service)
   })
 
   it('should create a new org', async () => {

@@ -1,8 +1,8 @@
 import { OrgsRepository } from '@/repositories/orgs-repository'
 import { Org } from '@prisma/client'
 import { hash } from 'bcryptjs'
-import axios from 'axios'
 import { OrgAlreadyExistsError } from './errors/org-already-exists-error'
+import { LocationService } from '@/services/location'
 
 interface CreateOrgRequest {
   name: string
@@ -17,7 +17,10 @@ interface CreateOrgResponse {
   org: Org
 }
 export class CreateOrgUseCase {
-  constructor(private orgsRepo: OrgsRepository) {}
+  constructor(
+    private orgsRepo: OrgsRepository,
+    private locationService: LocationService,
+  ) {}
 
   async execute({
     name,
@@ -35,9 +38,8 @@ export class CreateOrgUseCase {
 
     const password_hash = await hash(password, 6)
 
-    const resp = await axios.get(`https://viacep.com.br/ws/${postal_code}/json`)
+    const { city, state } = await this.locationService.getCep(postal_code)
 
-    const { localidade, uf } = resp.data
     const org = await this.orgsRepo.create({
       name,
       email,
@@ -45,10 +47,9 @@ export class CreateOrgUseCase {
       postal_code,
       cell_phone,
       password_hash,
-      state: uf,
-      city: localidade,
+      state,
+      city,
     })
-
     return { org }
   }
 }

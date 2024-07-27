@@ -14,7 +14,7 @@ describe('Get Pet- e2e', () => {
   })
 
   it('Should be able to get', async () => {
-    const org = makeOrg({ city: 'SÃO PAULO' })
+    const org = makeOrg({ city: 'São Paulo' })
     const pet = makePet({ city: org.city })
 
     await request(app.server).post('/orgs').send(org)
@@ -35,7 +35,7 @@ describe('Get Pet- e2e', () => {
       body: { pets },
     } = await request(app.server)
       .get('/pets')
-      .query({ city: 'SÃO PAULO', page: 1 })
+      .query({ city: 'São Paulo', page: 1 })
       .send()
 
     const response = await request(app.server).get(`/pets/${pets[0].id}`).send()
