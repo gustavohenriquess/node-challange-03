@@ -7,8 +7,7 @@ interface GetPetRequest {
   id: string
 }
 
-interface GetPetResponse {
-  pet: Pet
+interface GetPetResponse extends Pet {
   complements?: PetComplement[] | null
 }
 
@@ -26,7 +25,7 @@ export class GetPetUseCase {
     const complements = await this.petComplementRepo.findByPetId(id)
 
     return {
-      pet,
+      ...pet,
       complements,
     }
   }

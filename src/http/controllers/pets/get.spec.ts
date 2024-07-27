@@ -41,7 +41,7 @@ describe('Get Pet- e2e', () => {
     const response = await request(app.server).get(`/pets/${pets[0].id}`).send()
 
     expect(response.statusCode).toBe(200)
-    expect(response.body.pet).toEqual(
+    expect(response.body).toEqual(
       expect.objectContaining({
         id: pets[0].id,
       }),

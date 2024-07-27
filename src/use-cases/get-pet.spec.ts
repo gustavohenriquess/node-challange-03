@@ -5,6 +5,8 @@ import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository
 import { GetPetUseCase } from './get-pet'
 import { randomUUID } from 'node:crypto'
 import { ResourceNotFoundError } from './errors/resource-not-found'
+import { makeOrg } from 'test/factories/make-org.factories'
+import { makePet } from 'test/factories/make-pet.factories'
 
 let petRepo: InMemoryPetsRepository
 let petComplementRepo: InMemoryPetsComplementsRepository
@@ -18,43 +20,20 @@ describe.only('Get Pet UseCase', async () => {
     orgRepo = new InMemoryOrgsRepository()
     sut = new GetPetUseCase(petRepo, petComplementRepo)
 
-    await orgRepo.create({
-      id: 'orgId',
-      name: 'Org',
-      email: 'email@email.com',
-      person_responsible: 'Person',
-      postal_code: '123',
-      cell_phone: '123',
-      password_hash: '123',
-      state: 'São Paulo',
-      city: 'SP',
-    })
+    const org = makeOrg({ id: 'orgId' })
+    await orgRepo.create({ ...org, password_hash: org.password })
   })
 
   it('should be able to return a pet', async () => {
-    const petId = randomUUID()
-    await petRepo.create({
-      id: petId,
-      name: 'Pet',
-      about: 'About',
-      age: 1,
-      energy: 'FOUR',
-      size: 'SMALL',
-      independence: 'MEDIUM',
-      sex: 'MALE',
-      type: 'DOG',
-      environment: 'MEDIUM',
-      org_id: 'orgId',
-      city: 'São Paulo',
-    })
+    const pet = makePet({ orgId: 'orgId' })
+    await petRepo.create(pet)
 
-    const { pet, complements } = await sut.execute({ id: petId })
-
-    expect(pet.id).toEqual(petId)
-    expect(complements).toEqual([])
+    const response = await sut.execute({ id: pet.id })
+    console.log(response)
+    expect(response.id).toEqual(pet.id)
+    expect(response.complements).toEqual([])
   })
-
-  it('should not be able to return a uncreated petn', async () => {
+  it('should not be able to return a uncreated pet', async () => {
     await expect(async () => {
       await sut.execute({ id: randomUUID() })
     }).rejects.toBeInstanceOf(ResourceNotFoundError)

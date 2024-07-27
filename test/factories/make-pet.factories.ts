@@ -6,6 +6,7 @@ type Complements = {
 }
 
 type Overwrite = {
+  id?: string
   name?: string
   about?: string
   age?: number
@@ -26,6 +27,9 @@ export function makePet(overwrite?: Overwrite) {
   })
 
   return {
+    id: overwrite?.id ?? crypto.randomUUID(),
+    orgId: overwrite?.orgId ?? crypto.randomUUID(),
+    org_id: overwrite?.orgId ?? crypto.randomUUID(),
     name: faker.person.fullName(),
     about: faker.lorem.paragraph(),
     age: overwrite?.age ?? faker.number.int(10),
@@ -39,7 +43,9 @@ export function makePet(overwrite?: Overwrite) {
     energy:
       overwrite?.energy ??
       faker.helpers.arrayElement(['ONE', 'TWO', 'THREE', 'FOUR', 'FIVE']),
-    environment: faker.helpers.arrayElement(['SMALL', 'MEDIUM', 'LARGE']),
+    environment:
+      overwrite?.environment ??
+      faker.helpers.arrayElement(['SMALL', 'MEDIUM', 'LARGE']),
     sex: overwrite?.sex ?? faker.helpers.arrayElement(['MALE', 'FEMALE']),
     type:
       overwrite?.type ??
@@ -52,7 +58,7 @@ export function makePet(overwrite?: Overwrite) {
         'RODENT',
         'OTHER',
       ]),
-    complements: [
+    complements: overwrite?.complements ?? [
       {
         photo_url: faker.image.url(),
         requirement: faker.lorem.words(20),

@@ -9,6 +9,7 @@ type Overwrite = {
   postal_code?: string
   cell_phone?: string
   password_hash?: string
+  password?: string
   state?: string
   city?: string
 }
@@ -17,6 +18,7 @@ export function makeOrg(overwrite?: Overwrite) {
   const faker = new Faker({
     locale: [pt_BR],
   })
+  const pwd = faker.internet.password()
 
   return {
     id: overwrite?.id ?? crypto.randomUUID(),
@@ -26,7 +28,8 @@ export function makeOrg(overwrite?: Overwrite) {
       overwrite?.person_responsible ?? faker.person.fullName(),
     postal_code: overwrite?.postal_code ?? faker.location.zipCode('04560-011'),
     cell_phone: overwrite?.cell_phone ?? faker.phone.number(),
-    password: overwrite?.password_hash ?? faker.internet.password(),
+    password: overwrite?.password_hash ?? pwd,
+    password_hash: overwrite?.password_hash ?? pwd,
     state: overwrite?.state ?? faker.location.state(),
     city: overwrite?.city ?? faker.location.city(),
     created_at: new Date(),

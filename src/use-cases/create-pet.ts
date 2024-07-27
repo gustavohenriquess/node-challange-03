@@ -23,8 +23,7 @@ interface CreatePetRequest {
   complements?: Complements[] | undefined
 }
 
-interface CreatePetResponse {
-  pet: Pet
+interface CreatePetResponse extends Pet {
   complements?: PetComplement[]
 }
 
@@ -78,6 +77,6 @@ export class CreatePetUseCase {
         }),
       )
     }
-    return { pet, complements: petComplements }
+    return { ...pet, complements: petComplements }
   }
 }

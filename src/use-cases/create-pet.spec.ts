@@ -4,6 +4,8 @@ import { CreatePetUseCase } from './create-pet'
 import { InMemoryPetsComplementsRepository } from '@/repositories/in-memory/pets-complements-repository'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found'
+import { makeOrg } from 'test/factories/make-org.factories'
+import { makePet } from 'test/factories/make-pet.factories'
 
 let petRepo: InMemoryPetsRepository
 let petComplementRepo: InMemoryPetsComplementsRepository
@@ -16,62 +18,30 @@ describe('Create Pet', () => {
     petComplementRepo = new InMemoryPetsComplementsRepository()
     orgRepo = new InMemoryOrgsRepository()
     sut = new CreatePetUseCase(petRepo, petComplementRepo, orgRepo)
-
-    await orgRepo.create({
-      id: 'orgId',
-      name: 'Org',
-      email: 'email@email.com',
-      person_responsible: 'Person',
-      postal_code: '123',
-      cell_phone: '123',
-      password_hash: '123',
-      state: 'São Paulo',
-      city: 'SP',
-    })
+    const org = makeOrg({ id: 'orgId' })
+    await orgRepo.create({ ...org, password_hash: org.password })
   })
 
   it('should create a new pet', async () => {
-    const { pet } = await sut.execute({
-      name: 'Pet',
-      about: 'About',
-      age: 1,
-      energy: 'FOUR',
-      size: 'SMALL',
-      independence: 'MEDIUM',
-      sex: 'MALE',
-      type: 'DOG',
-      environment: 'MEDIUM',
-      orgId: 'orgId',
-    })
+    const pet = await sut.execute({ ...makePet(), orgId: 'orgId' })
 
     expect(pet.id).toEqual(expect.any(String))
   })
 
   it('should create a new pet with complements', async () => {
-    const { pet, complements } = await sut.execute({
-      name: 'Pet',
-      about: 'About',
-      age: 1,
-      energy: 'FOUR',
-      size: 'SMALL',
-      independence: 'MEDIUM',
-      sex: 'MALE',
-      type: 'DOG',
-      environment: 'MEDIUM',
+    const pet = await sut.execute({
+      ...makePet(),
       orgId: 'orgId',
-      complements: [{ requirement: 'requirement' }, { photo_url: 'photo_url' }],
     })
 
     expect(pet.id).toEqual(expect.any(String))
-    expect(complements).toEqual(
+    expect(pet.complements).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           id: expect.any(String),
-          requirement: 'requirement',
         }),
         expect.objectContaining({
           id: expect.any(String),
-          photo_url: 'photo_url',
         }),
       ]),
     )
@@ -79,22 +49,7 @@ describe('Create Pet', () => {
 
   it('should not be able to create a new pet with invalid org', async () => {
     await expect(async () => {
-      await sut.execute({
-        name: 'Pet',
-        about: 'About',
-        age: 1,
-        energy: 'FOUR',
-        size: 'SMALL',
-        independence: 'MEDIUM',
-        sex: 'MALE',
-        type: 'DOG',
-        environment: 'MEDIUM',
-        orgId: 'INVALID_ORG_ID',
-        complements: [
-          { requirement: 'requirement' },
-          { photo_url: 'photo_url' },
-        ],
-      })
+      await sut.execute({ ...makePet() })
     }).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })

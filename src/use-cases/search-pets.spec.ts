@@ -3,7 +3,8 @@ import { InMemoryPetsComplementsRepository } from '@/repositories/in-memory/pets
 import { InMemoryPetsRepository } from '@/repositories/in-memory/pets-repository'
 import { SearchPetsUseCase } from './search-pets'
 import { InMemoryOrgsRepository } from '@/repositories/in-memory/orgs-repository'
-import { randomUUID } from 'node:crypto'
+import { makeOrg } from 'test/factories/make-org.factories'
+import { makePet } from 'test/factories/make-pet.factories'
 
 let petsRepo: InMemoryPetsRepository
 let petsComplementRepo: InMemoryPetsComplementsRepository
@@ -17,34 +18,11 @@ describe('Search Pets UseCase', () => {
     orgsRepo = new InMemoryOrgsRepository()
     sut = new SearchPetsUseCase(petsRepo, petsComplementRepo)
 
-    await orgsRepo.create({
-      id: 'orgId',
-      name: 'Org',
-      email: 'email@email.com',
-      person_responsible: 'Person',
-      postal_code: '123',
-      cell_phone: '123',
-      password_hash: '123',
-      state: 'São Paulo',
-      city: 'SP',
-    })
+    const org = makeOrg({ id: 'orgId' })
+    await orgsRepo.create({ ...org, password_hash: org.password })
 
     for (let i = 0; i < 5; i++) {
-      const petId = randomUUID()
-      await petsRepo.create({
-        id: petId,
-        name: 'Pet',
-        about: 'About',
-        age: 1,
-        energy: 'FOUR',
-        size: 'SMALL',
-        independence: 'MEDIUM',
-        sex: 'MALE',
-        type: 'DOG',
-        environment: 'MEDIUM',
-        org_id: 'orgId',
-        city: 'São Paulo',
-      })
+      await petsRepo.create(makePet({ orgId: 'orgId', city: 'São Paulo' }))
     }
   })
 
@@ -56,20 +34,7 @@ describe('Search Pets UseCase', () => {
 
   it('should be able to search paginated pets', async () => {
     for (let i = 0; i < 25; i++) {
-      await petsRepo.create({
-        id: randomUUID(),
-        name: 'Pet',
-        about: 'About',
-        age: 1,
-        energy: 'FOUR',
-        size: 'SMALL',
-        independence: 'MEDIUM',
-        sex: 'MALE',
-        type: 'DOG',
-        environment: 'MEDIUM',
-        org_id: 'orgId',
-        city: 'São Bernardo',
-      })
+      await petsRepo.create(makePet({ orgId: 'orgId', city: 'São Bernardo' }))
     }
 
     const { pets } = await sut.execute({ city: 'São Bernardo', page: 1 })
