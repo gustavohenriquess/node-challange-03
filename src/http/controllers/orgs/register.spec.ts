@@ -1,6 +1,6 @@
 import { app } from '@/app'
-import { Faker, pt_BR } from '@faker-js/faker'
 import request from 'supertest'
+import { makeOrg } from 'test/factories/make-org.factories'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 describe('Register Org - e2e', () => {
@@ -13,18 +13,7 @@ describe('Register Org - e2e', () => {
   })
 
   it('Should be able to register', async () => {
-    const faker = new Faker({
-      locale: [pt_BR],
-    })
-
-    const response = await request(app.server).post('/orgs').send({
-      name: faker.person.fullName(),
-      email: faker.internet.email(),
-      password: faker.internet.password(),
-      cell_phone: faker.phone.number(),
-      person_responsible: faker.person.fullName(),
-      postal_code: faker.location.zipCode(),
-    })
+    const response = await request(app.server).post('/orgs').send(makeOrg())
 
     expect(response.statusCode).toBe(201)
   })

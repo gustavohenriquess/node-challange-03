@@ -28,7 +28,7 @@ export function makeOrg(overwrite?: Overwrite) {
       overwrite?.person_responsible ?? faker.person.fullName(),
     postal_code: overwrite?.postal_code ?? faker.location.zipCode('04560-011'),
     cell_phone: overwrite?.cell_phone ?? faker.phone.number(),
-    password: overwrite?.password_hash ?? pwd,
+    password: overwrite?.password ?? pwd,
     password_hash: overwrite?.password_hash ?? pwd,
     state: overwrite?.state ?? faker.location.state(),
     city: overwrite?.city ?? faker.location.city(),

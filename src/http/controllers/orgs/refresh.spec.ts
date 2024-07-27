@@ -1,6 +1,7 @@
 import { app } from '@/app'
 import { Faker, pt_BR } from '@faker-js/faker'
 import request from 'supertest'
+import { makeOrg } from 'test/factories/make-org.factories'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
 describe('Refresh - e2e', () => {
@@ -20,14 +21,7 @@ describe('Refresh - e2e', () => {
     const email = faker.internet.email()
     const password = faker.internet.password()
 
-    await request(app.server).post('/orgs').send({
-      name: faker.person.fullName(),
-      email,
-      password,
-      cell_phone: faker.phone.number(),
-      person_responsible: faker.person.fullName(),
-      postal_code: faker.location.zipCode(),
-    })
+    await request(app.server).post('/orgs').send(makeOrg({ email, password }))
 
     const authResponse = await request(app.server).post('/sessions').send({
       email,
