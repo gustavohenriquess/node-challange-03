@@ -13,7 +13,7 @@ let petComplementRepo: InMemoryPetsComplementsRepository
 let orgRepo: InMemoryOrgsRepository
 let sut: GetPetUseCase
 
-describe.only('Get Pet UseCase', async () => {
+describe('Get Pet UseCase', async () => {
   beforeEach(async () => {
     petRepo = new InMemoryPetsRepository()
     petComplementRepo = new InMemoryPetsComplementsRepository()
