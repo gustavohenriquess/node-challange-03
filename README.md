@@ -1,7 +1,6 @@
-# Find a Friend
-O projeto "Find a Friend" é uma aplicação dedicada a facilitar a adoção de pets, permitindo o cadastro de organizações (ORGs) e pets disponíveis para adoção.
-Ela foi desenvolvida pela [Rocketseat](https://www.rocketseat.com.br/) como um [desafio](https://efficient-sloth-d85.notion.site/Desafio-03-0b927eb32dbd4f21ab40224ffdf6cf19#a32de3cb7ab146f4af1fa657e94697b1) para o Ignite.
+# Solid Challenge
 
+O Solid Challenge foi desenvolvida pela [Rocketseat](https://www.rocketseat.com.br/) como um [desafio](https://efficient-sloth-d85.notion.site/Desafio-03-0b927eb32dbd4f21ab40224ffdf6cf19#a32de3cb7ab146f4af1fa657e94697b1) para o Ignite com nome de "Find a Friend" uma aplicação dedicada a facilitar a adoção de pets, permitindo o cadastro de organizações (ORGs) e pets disponíveis para adoção.
 
 ## Boas Práticas Utilizadas:
 - **Princípios SOLID**: A aplicação foi desenvolvida seguindo os princípios SOLID, garantindo um código mais limpo, modular e de fácil manutenção.
